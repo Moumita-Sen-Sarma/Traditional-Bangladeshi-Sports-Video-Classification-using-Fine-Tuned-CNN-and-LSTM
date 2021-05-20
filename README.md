@@ -13,4 +13,18 @@ In videos, spatial features or elements can be defined as the characteristics re
 There remains temporal connectivity across sequential frames in sports videos. The recurrent neural network may play a crucial role in this regard. However, traditional RNN suffers from short term memory, i.e., it is incompetent in retaining information for longer periods. In this regard, **LSTM**, i.e., **Long Short Term Memory**, was developed as a remedy to short-term memory and vanishing gradient problems. Here, the extracted spatial features of sequential frames by CNN are fed to an LSTM layer for analyzing them in order.
 
 ## Deep Neural Network Architecture:
-![Alt text](images/gui1.png?raw=true "Title")
+- **VGG19** as spatial feature extractor
+- **LSTM** as temporal feature extractor
+- **Softmax** based output layer for getting probability distribution of classes
+
+![Alt text](images/vgg19model.png?raw=true "Title")
+
+## Flask Deployment
+Flask has been used to develop the UI through which user can get label for new traditional banglaeshi sports videos. It has certain features:
+- Upload video option
+- Checking allowed extensions of video
+- Predict label that when clicked, acquires class label of video from the saved model and display it to the users
+- Displaying uploaded video
+
+#### *Before Uploading Video::* 
+
