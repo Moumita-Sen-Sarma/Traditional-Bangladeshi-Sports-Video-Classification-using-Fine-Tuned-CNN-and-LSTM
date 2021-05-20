@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-image {
+  /* The image used */
+  background-image: url("static/Pic.jpg");
+  
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  
+  /* Full height */
+  height: 100%; 
+  
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Position text in the middle of the page/image */
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+
+.btn-lg {
+  background-color: black;
+  border-color: white;
+  font-weight: bold;
+}
+.classlabel{
+
+  border: 3px outset red;
+  background-color: green;
+  text-align: center;
+  position: absolute;
+  height:6%;
+  width:23%;
+  top: 69%;
+  left: 38%;
+}
+</style>
+
+</head>
+<body>
+
+<div class="bg-image"> {{ url_for('static', filename='Pic.jpg') }} </div>
+<form method="post" action="/" enctype="multipart/form-data">
+<div class="bg-text">
+  <h1>Traditional Bengali Sports Video Classification</h1>
+  <h2 style="color:red" >Select a Video to Upload</h2>
+  <p>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}
+    
+    {% endif %} 
+  {% endwith %}
+</p>
+{% if filename %}
+  <div>
+    <!-- <img src="{{ url_for('static', filename='uploads/'+filename) }}" height='340px' width='440px'> -->
+  <video width="320" height="240" autoplay loop>
+  <source src="{{ url_for('static', filename='uploads/'+filename) }}" type="video/mp4" />
+</video>
+  </div>
+{% endif %}
+
+{% if cls %}
+<div class="classlabel">
+  <p>{{cls}}</p>
+</div>
+<!-- <p style="color: white"><b>{{cls}}</b></p> -->
+{% endif %}
+<br>
+  <p>
+      <input  type="file" name="file" autocomplete="off" required>
+    </p>
+  <p> 
+    <input class='btn  btn-lg' style="color:white" type="submit" value="Predict Label !">
+    <!-- <input type="submit" class="btn btn-info" value="Submit Button"> -->
+
+ </p>
+  <!-- <p>And I'm a Photographer</p> -->
+</div>
+</form>
+</body>
+</html>
