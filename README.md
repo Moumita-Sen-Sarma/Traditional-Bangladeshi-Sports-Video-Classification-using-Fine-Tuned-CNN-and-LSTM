@@ -3,6 +3,8 @@ Traditional Bangladeshi sport is a genre of sports that bears the cultural signi
 
 Furthermore, the two most prominent deep learning networks, i.e., **Convolutional Neural Network (CNN)** and **Recurrent Neural Network (RNN)**, are utilized as they can capture the spatial and temporal features, respectively, from videos that are obligatory for correctly classifying the video classes. In this regard, the transfer learning approach with the fine-tuned VGG19 and LSTM is used for the classification task. This model exposes impressive performance by showing 99% average accuracy on the dataset.
 
+## Samples of 5 types of Traditional Bangladeshi Sports Videos:
+
 ## Feature Extraction
 - **Spatial Features:**
 
@@ -27,4 +29,10 @@ Flask has been used to develop the UI through which user can get label for new t
 - Displaying uploaded video
 
 #### *Before Uploading Video::* 
-
+![Alt text](images/flask1.PNG?raw=true "Title")
+#### *After clicking Predict label option Without Uploading Video:*
+![Alt text](images/flask2.PNG?raw=true "Title")
+#### *After Uploading Video:*
+![Alt text](images/flask3.PNG?raw=true "Title")
+#### *After clicking Generate Caption option:*
+![Alt text](images/flask4.PNG?raw=true "Title")
