@@ -37,5 +37,5 @@ Flask has been used to develop the UI through which user can get label for new t
 ![Alt text](images/flask2.PNG?raw=true "Title")
 #### *After Uploading Video:*
 ![Alt text](images/flask3.PNG?raw=true "Title")
-#### *After clicking Generate Caption option:*
+#### *After clicking Predict Label option:*
 ![Alt text](images/flask4.PNG?raw=true "Title")
