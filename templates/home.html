@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sports Video Classifie</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- ======================================================================================================= -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+<!-- ======================================================================================================= -->
+
+</head>
+<body>
+
+
+<!-- ==================================================Jquery to dynamically update content===================================================== -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson }};
+</script>
+
+<script type=text/javascript>
+
+  $(function() {
+      $('#calculate').bind('click', function() {
+        $.getJSON($SCRIPT_ROOT + '/get_name', {
+          name: $('input[name="upvid[]"]').val(),
+        }, function(data) {
+          $("#result").text(data.result);
+        });
+        return false;
+      });
+    });
+
+
+  $(document).ready(function (e) {
+      $('#file-input').on('change', function () {
+        var form_data = new FormData();
+        var ins = document.getElementById('file-input').files.length;
+
+        if(ins == 0) {
+          $('#msg').html('<span style="color:red">Select at least one file</span>');
+          return;
+        }
+        for (var x = 0; x < ins; x++) {
+          form_data.append("upvid[]", document.getElementById('file-input').files[x]);
+        }
+
+  $.ajax({
+          url: '/upload', // point to server-side URL
+          dataType: 'json', // what to expect back from server
+          cache: false,
+          contentType: false,
+          processData: false,
+          data: form_data,
+          type: 'post',
+          success: function (response) { // display success response
+            $('#msg').html('');
+            $.each(response, function (key, data) {             
+              if(key !== 'message') {
+                $('#msg').append(key + ' -> ' + data + '<br/>');
+              } else {
+                $('#msg').append(data + '<br/>');
+              }
+            })
+          },
+          error: function (response) {
+            $('#msg').html(response.message); // display error response
+          }
+        });
+      });
+    });
+</script>
+<!-- ======================================================================================================= -->
+
+
+    <div class="bg-image" style="background-image: url( {{ url_for('static', filename='bg.jpg') }} )"> </div>
+
+    <div class="bg-text">
+        <h1>Traditional Bengali Sports Video Classification</h1>
+        <h2 style="color:red" >Select a Video to Upload</h2>
+        <p></p>
+        <p id="msg"></p>
+        <div>
+            <!-- <video width="320" height="240" autoplay loop> -->
+            <video id="video" width="320" height="240" controls></video>
+
+        </div>
+
+        <br>
+        <div  class="justify-content-center">
+            <p id="result" class="classlabel" >_________</p>
+        </div>
+
+        <br>
+        
+            <input id="file-input" type="file" name="upvid[]" accept="video/*" multiple="multiple"/>
+
+            <button class="btn  btn-lg" style="color:white" id="calculate">
+              Predict Label !
+            </button>
+
+    </div>
+
+
+
+<script type="text/javascript">
+    
+    const input = document.getElementById('file-input');
+    const video = document.getElementById('video');
+    const videoSource = document.createElement('source');
+
+    input.addEventListener('change', function() {
+      const files = this.files || [];
+
+      if (!files.length) return;
+      
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        videoSource.setAttribute('src', e.target.result);
+        video.appendChild(videoSource);
+        video.load();
+        video.play();
+      };
+      
+      reader.onprogress = function (e) {
+        console.log('progress: ', Math.round((e.loaded * 100) / e.total));
+      };
+      
+      reader.readAsDataURL(files[0]);
+    });
+</script>
+
+</body>
+</html>
