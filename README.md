@@ -3,6 +3,7 @@ Traditional Bangladeshi sport is a genre of sports that bears the cultural signi
 
 Furthermore, the two most prominent deep learning networks, i.e., **Convolutional Neural Network (CNN)** and **Recurrent Neural Network (RNN)**, are utilized as they can capture the spatial and temporal features, respectively, from videos that are obligatory for correctly classifying the video classes. In this regard, the transfer learning approach with the fine-tuned VGG19 and LSTM is used for the classification task. This model exposes impressive performance by showing 99% average accuracy on the dataset. The weight of this model can be downloaded from [here.](https://drive.google.com/file/d/1-5VN6yP8g7EorAg8dT8LBjr82yFaBmhp/view?usp=sharing)
 
+## [*Live Link !!*](https://bengali-sports-classifier.herokuapp.com/)
 
 ## Samples of 5 types of Traditional Bangladeshi Sports Video Frames:
 ![Alt text](images/dataset.png?raw=true "Title")
